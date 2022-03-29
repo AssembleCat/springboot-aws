@@ -1,9 +1,10 @@
 buildscript {
-    ext{
-        springBootVersion = '2.1.7.RELEASE'
+    ext {
+        springBootVersion = '2.1.9.RELEASE'
     }
     repositories {
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -15,35 +16,29 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-group 'com.cocoa'
-version '1.0-SNAPSHOT'
+group 'com.spring'
+version '1.0.4-SNAPSHOT-'+new Date().format("yyyyMMddHHmmss")
 sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
-    compileClasspath('org.springframework.boot:spring-boot-starter-web')
-    testCompileClasspath('org.springframework.boot:spring-boot-starter-test')
-}
+    //compile시 참조하는 lib
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.projectlombok:lombok')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-mustache')
+    compile('com.h2database:h2')
 
-/*plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.5.10'
-    id 'java'
-}
+    compile('org.springframework.boot:spring-boot-starter-oauth2-client')
+    compile('org.springframework.session:spring-session-jdbc')
 
-repositories {
-    mavenCentral()
-    mavenCentral()
-}
+    compile("org.mariadb.jdbc:mariadb-java-client")
 
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    //test시 참조되는 lib
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile("org.springframework.security:spring-security-test")
 }
-
-test {
-    useJUnitPlatform()
-}*/
